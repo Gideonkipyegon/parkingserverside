@@ -21,14 +21,14 @@ export const createCustomer = async(req, res) => {
         let pool = await sql.connect(config.sql);
         await pool
             .request()
-            .input("CustomerID", sql.Int, CustomerID)
+            // .input("CustomerID", sql.Int, CustomerID)
             .input("FirstName", sql.VarChar, FirstName)
             .input("LastName", sql.VarChar, LastName)
             .input("EmailAddress", sql.VarChar, EmailAddress)
             .input("PhoneNumber", sql.VarChar, PhoneNumber)
             .input("Address", sql.VarChar, Address)
             .query(
-                "INSERT INTO Vehicles(CustomerID,FirstName,LastName,EmailAddress, PhoneNumber,Address) VALUES (@CustomerID,@FirstName,@LastName,@EmailAddress,@PhoneNumber,Address)"
+                "INSERT INTO Vehicles(FirstName,LastName,EmailAddress, PhoneNumber,Address) VALUES (@FirstName,@LastName,@EmailAddress,@PhoneNumber,@Address)"
             );
         res.status(200).json(" You are registered successfully");
     } catch (error) {

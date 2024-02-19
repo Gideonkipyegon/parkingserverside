@@ -45,51 +45,6 @@ export const register = async(req, res) => {
     }
 };
 
-
-
-
-// export const login = async(req, res) => {
-//     const { FirstName, Password } = req.body;
-//     let pool = await sql.connect(config.sql);
-//     try {
-//         const result = await pool
-//             .request()
-//             .input('FirstName', sql.VarChar, FirstName)
-//             .query('SELECT * FROM Customers WHERE FirstName=@FirstName');
-//         const user = result.recordset[0];
-//         if (!FirstName) {
-//             return res.status(401).json({ message: 'authentication failed. wrong credentials' });
-//         }
-//         if (!Password) {
-//             return res.status(401).json({ error: 'wrong credentials' });
-//         }
-//         const passwordMatch = await bcrypt.compare(Password, user.Password);
-//         if (!passwordMatch) {
-//             return res.status(401).json({ error: 'authentication failed. wrong credentials' });
-//         }
-//         const token = jwt.sign({
-//                 FirstName: user.FirstName,
-//                 LastName: user.LastName
-//             },
-//             config.jwt_secret, { expiresIn: '10 minutes' }
-//         );
-//         return res.status(200).json({
-//             FirstName: user.FirstName,
-//             LastName: user.LastName,
-//             id: user.UserID,
-//             token: token
-//         });
-//     } catch (error) {
-//         console.error("error:", error);
-//         return res.status(500).json(error.message);
-//     } finally {
-//         if (pool) {
-//             pool.close();
-//         }
-//     }
-// };
-
-
 export const login = async(req, res) => {
     const { FirstName, password } = req.body;
 

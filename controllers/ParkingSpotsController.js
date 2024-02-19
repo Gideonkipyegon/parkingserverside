@@ -45,7 +45,7 @@ export const getSingleParkingSpots = async(req, res) => {
         const result = await pool
             .request()
             .input("id", sql.VarChar, id)
-            .query(`SELECT * FROM ParkingSpots WHERE ParkingSpotsID = @id`);
+            .query(`SELECT * FROM ParkingSpots WHERE SpotID = @id`);
         res.status(200).json(result.recordset[0]);
     } catch (error) {
         res.status(201).json(error.message);
@@ -69,7 +69,7 @@ export const updateParkingSpots = async(req, res) => {
             .input("Availability", sql.VarChar, Availability)
             .input("Floor", sql.VarChar, Floor)
             .query(
-                `UPDATE ParkingSpots SET PostID=@PostID,UserID = @UserID, Content = @Content WHERE ParkingSpotsID = @id`
+                `UPDATE ParkingSpots SET SpotNumber = @SpotNumber, SpotType = @SpotType,Availability = @Availability,Floor = @Floor WHERE SpotID = @id`
             );
         res.status(200).json("ParkingSpots updated successfully");
     } catch (error) {
@@ -87,7 +87,7 @@ export const deleteParkingSpots = async(req, res) => {
         await pool
             .request()
             .input("id", sql.VarChar, id)
-            .query(`DELETE FROM ParkingSpots WHERE ParkingSpotsID = @id`);
+            .query(`DELETE FROM ParkingSpots WHERE SpotID = @id`);
         res.status(200).json("ParkingSpots deleted successfully");
     } catch (error) {
         res.status(500).json(error.message);
