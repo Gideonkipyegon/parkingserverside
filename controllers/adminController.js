@@ -21,14 +21,14 @@ export const createAdmin = async(req, res) => {
         let pool = await sql.connect(config.sql);
         await pool
             .request()
-            .input("AdminID", sql.Int, AdminID)
+            // .input("AdminID", sql.Int, AdminID)
             .input("Username", sql.VarChar, Username)
             .input("Password", sql.VarChar, Password)
             .input("FirstName", sql.VarChar, FirstName)
             .input("LastName", sql.VarChar, LastName)
             .input("EmailAddress", sql.VarChar, EmailAddress)
             .query(
-                "INSERT INTO Admins(AdminID,Username,Password,FirstName, LastName,EmailAddress) VALUES (@AdminID,@Username,@Password,@FirstName,@LastName,@EmailAddress )"
+                "INSERT INTO Admins(Username,Password,FirstName, LastName,EmailAddress) VALUES (@Username,@Password,@FirstName,@LastName,@EmailAddress )"
             );
         res.status(200).json("added successfully");
     } catch (error) {
